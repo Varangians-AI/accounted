@@ -29,6 +29,7 @@ import {
   Scale,
   ShieldCheck,
   Stamp,
+  FileQuestion,
 } from 'lucide-react'
 import type {
   ExpensePayoutDue,
@@ -230,7 +231,9 @@ export default function AttGoraSection({
   const granskaRows =
     counts.supplier_invoice_approval > 0 ||
     counts.verifikat_missing_document > 0 ||
-    counts.pending_operations > 0
+    counts.pending_operations > 0 ||
+    counts.document_relevance > 0 ||
+    counts.document_unclassified > 0
   const bevakaRows =
     counts.overdue_invoice > 0 ||
     counts.deadline_action > 0 ||
@@ -481,6 +484,23 @@ export default function AttGoraSection({
                         icon={ShieldCheck}
                         label={t('row_pending_ops')}
                         count={counts.pending_operations}
+                      />
+                    )}
+                    {counts.document_relevance > 0 && (
+                      <WorklistRow
+                        href="/arkiv/granska"
+                        icon={FileQuestion}
+                        label={t('row_document_relevance')}
+                        detail={t('row_document_relevance_detail')}
+                        count={counts.document_relevance}
+                      />
+                    )}
+                    {counts.document_unclassified > 0 && (
+                      <WorklistRow
+                        href="/arkiv/granska#typ"
+                        icon={FileQuestion}
+                        label={t('row_document_unclassified')}
+                        count={counts.document_unclassified}
                       />
                     )}
                   </div>
