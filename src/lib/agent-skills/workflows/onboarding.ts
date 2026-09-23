@@ -1,4 +1,4 @@
-import type { Skill } from './types'
+import type { Skill } from '../types'
 import {
   ENTITY_TYPES,
   ENTITY_TYPE_LABELS_SV,

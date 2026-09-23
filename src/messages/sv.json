@@ -1,4 +1,42 @@
 {
+  "ai_handoff": {
+    "do_with": "Gör med {client}",
+    "do_with_ai": "Gör det med din AI",
+    "title": "Fortsätt med din AI",
+    "description": "Granska uppdraget, kopiera prompten och klistra in den i din anslutna AI. Att öppna en chatt bokför ingenting.",
+    "choose_ai": "Välj AI",
+    "connect_help": "Anslut {client} till Accounted innan du använder prompten. Tillgängligheten beror på ditt AI-abonnemang. Du kopierar och klistrar in uppdraget själv.",
+    "connect": "Anslut {client}",
+    "skills_preview": "Skills för uppgiften",
+    "cli_help": "Använder du Claude Code eller Codex? Klistra in samma prompt i en session ansluten till Accounted MCP.",
+    "skills": "{skills}. Företagets aktuella instruktioner hämtas via MCP när uppgiften startar.",
+    "discovered_skills": "Väljs utifrån ditt bokföringsarbete",
+    "instructions": "Extra instruktioner (valfritt)",
+    "instructions_placeholder": "Till exempel: granska bokföringsförslagen först och förklara osäkra matchningar.",
+    "too_many": "Välj högst {max} poster innan du fortsätter. Inga poster har utelämnats.",
+    "exact_prompt": "Visa och redigera hela prompten",
+    "copy_failed": "Det gick inte att kopiera. Markera prompten ovan och kopiera den manuellt.",
+    "copied": "Kopierad",
+    "copy": "Kopiera prompt",
+    "open": "Öppna {client}",
+    "prompt_company": "Hjälp mig med bokföringen för {name}, company_id {companyId}. Kontrollera att det är rätt företag innan du läser eller ändrar något.",
+    "prompt_bootstrap": "Börja med accounted_get_task med exakt dessa argument: {args}. Anropa sedan accounted_get_agent_briefing för detta företag.",
+    "prompt_skills": "Ladda arbetsflödena {skills} och de ytterligare aktiva företags- och byråinstruktioner som get_task returnerar. Om ett verktyg saknas, hitta det med accounted_search_tools.",
+    "prompt_discover": "Använd briefing och aktuella uppgifter för att föreslå det mest användbara bokföringsarbetet. Be mig välja innan du gör ändringar.",
+    "prompt_scope": "Respektera angiven period, filter och valda poster. Banktransaktioner och skattekontoposter har olika slags ID. Utöka inte urvalet. Läs aktuella uppgifter igen eftersom antal och urval kan ha ändrats.",
+    "prompt_evidence": "Granska befintliga underlag, fakturor, konteringsmönster och väntande förslag. Förklara föreslagna bokningar och osäkra matchningar. Fråga om uppgifter saknas. Hitta inte på underlag och sök inte efter kvitton i e-post. Använd aktuella skills och Accounteds beräkningsverktyg, inte skatteregler ur minnet.",
+    "prompt_approval": "Skapa förslag med Accounteds verktyg. Visa vad som ändras och invänta mitt uttryckliga godkännande innan du genomför dem. Respektera periodlås och öppna inte låsta perioder.",
+    "prompt_finish": "Läs berörda poster igen efter godkända åtgärder. Sammanfatta genomfört arbete, förslag som väntar på godkännande, blockerade poster och nästa användbara steg. Rapportera aldrig ett väntande förslag som klart.",
+    "prompt_extra": "Mina extra instruktioner: {instructions}",
+    "task_bookkeep": "Hjälp mig bokföra transaktionerna i detta urval.",
+    "task_check": "Granska bokföringen och förklara eventuella problem och nästa användbara steg.",
+    "task_month-close": "Hjälp mig granska och avsluta denna månad.",
+    "task_payroll": "Hjälp mig förbereda lönerna.",
+    "task_vat": "Hjälp mig granska momsen för denna period.",
+    "task_year-end": "Hjälp mig granska och förbereda bokslutet för detta räkenskapsår.",
+    "task_start": "Föreslå användbart bokföringsarbete utifrån företagets aktuella läge.",
+    "task_skill": "Hjälp mig genomföra en uppgift med skillen {skill}."
+  },
   "common": {
     "undo": "Ångra",
     "active_company": "Aktivt företag",
@@ -101,6 +139,8 @@
     "close_menu": "Stäng meny",
     "navigation_menu": "Navigeringsmeny",
     "badge_coming_soon": "Kommer snart",
+    "skills": "Skills",
+    "badge_new": "Ny",
     "badge_dev": "Dev",
     "badge_beta": "Beta",
     "needs_company_tooltip": "Lägg till ett företag för att aktivera",
@@ -788,6 +828,7 @@
     "type_book_skattekonto_rows": "Bokför skattekontohändelser",
     "origin_agent_chat": "Föreslaget av AI-assistenten via chatt",
     "origin_mcp": "Föreslaget av AI-assistent via {label}",
+    "skills_retrieved": "Hämtade skills: {skills}",
     "origin_api": "Föreslaget via API-integration",
     "origin_cron": "Skapat av automatiskt jobb",
     "badge_auto_expired": "Utgick automatiskt",
@@ -10208,6 +10249,237 @@
     "error_title": "Kunde inte nå VIES",
     "error_description": "Försök igen om en stund, eller validera från kundkortet.",
     "acknowledge_swedish_vat": "Jag vill fakturera med svensk moms trots att kunden är ett EU-företag utan validerat momsnummer."
+  },
+  "skills_registry": {
+    "title": "Skills",
+    "help": "Koppla din agent för att få full tillgång.",
+    "create": "Skapa skill",
+    "create_prompt": "Ladda skillen \"create-skill\" från Accounted (load_skill) och följ den. Jag vill skapa en egen skill.",
+    "now_count": "{count} att göra",
+    "all_done": "Allt klart",
+    "uses": "{count, plural, one {Körd en gång} other {Körd # gånger}}",
+    "uses_line": "{count, plural, one {Körd en gång} other {Körd # gånger}} senaste halvåret, senast {date}.",
+    "suggest": {
+      "bookkeep": {
+        "line": "{count, plural, one {En transaktion väntar} other {# transaktioner väntar}} på att bokföras.",
+        "cta": "Låt {client} bokföra {count, plural, one {den} other {dem}}"
+      },
+      "kvittojakten": {
+        "line": "{count, plural, one {Ett underlag saknas} other {# underlag saknas}} eller väntar i inkorgen.",
+        "cta": "Låt {client} leta upp {count, plural, one {det} other {dem}}"
+      },
+      "reconcile-month": {
+        "line": "Det är dags att stämma av bankkontot.",
+        "cta": "Låt {client} stämma av"
+      }
+    },
+    "sheet_todo": "{count, plural, one { sak på Att göra väntar} other { saker på Att göra väntar}} på den här skillen.",
+    "run_hint": "Prompten kopieras och {client} öppnas i en ny flik.",
+    "create_card_title": "Skapa din egen skill",
+    "create_card_body": "Något du gör varje månad? Berätta för {client}, så blir det en skill.",
+    "create_card_cta": "Skapa med {client}",
+    "hero_title": "Agent Skills",
+    "sign_title": "Koppla din agent för att öppna alla skills",
+    "connect_client": "Koppla {client}",
+    "wait_claude_title": "Fortsätt i Claude-fliken.",
+    "wait_claude_body": "Godkänn kopplingen där. När du kommer tillbaka hit tänds dina skills.",
+    "wait_title": "Fortsätt i {client}.",
+    "open_client": "Öppna {client}",
+    "check_again": "Jag har kopplat",
+    "still_waiting": "Ingen koppling hittades ännu. Godkänn i {client} och försök igen.",
+    "copy": "Kopiera",
+    "copied": "Kopierad",
+    "copy_failed": "Kunde inte kopiera. Markera texten och kopiera den själv.",
+    "server_address": "Serveradress",
+    "step_1": "Kopiera adressen ovan.",
+    "step_2": "Öppna {client}, gå till appar eller kopplingar och klistra in den som ny MCP-server.",
+    "step_3": "Godkänn där. Kom sedan tillbaka hit, så tänds dina skills.",
+    "cancel": "Avbryt",
+    "close": "Stäng",
+    "say_label": "Säg till din AI",
+    "prompt": "{say} Ladda skillen \"{skill}\" från Accounted (load_skill) och följ den.",
+    "own_say": "Kör min skill {name} i Accounted.",
+    "open_hint": "Öppna",
+    "run_client": "Gör det med {client}",
+    "copied_open": "Kopierat. Klistra in i {client}.",
+    "copy_full": "Kopiera instruktionen",
+    "copied_full": "Kopierad",
+    "body_failed": "Kunde inte hämta instruktionen.",
+    "locked_line": "Koppla din agent för att använda den här.",
+    "own_desc": "Skapad av dig. Din AI hämtar alltid den senaste versionen.",
+    "draft_tag": "Ny: lägg till",
+    "draft_desc": "Skapad av din AI. Läs igenom stegen. När du lagt till den kan din AI använda den.",
+    "add_draft": "Lägg till skillen",
+    "edit_answers": "Ändra svar",
+    "delete": "Ta bort",
+    "delete_confirm": "Ta bort skillen? Din AI kan inte längre hämta den.",
+    "load_failed": "Kunde inte hämta skills.",
+    "retry": "Försök igen",
+    "save_failed": "Kunde inte spara skillen. Försök igen.",
+    "viewer_note": "Du har läsbehörighet i företaget och kan inte skapa eller ta bort skills.",
+    "skills": {
+      "bookkeep": {
+        "name": "Bokför transaktioner",
+        "short": "Föreslår konto och moms. Du godkänner.",
+        "desc": "Går igenom obokade banktransaktioner, föreslår konto och moms och väntar på ditt godkännande.",
+        "steps": [
+          "Hämtar dina obokade banktransaktioner",
+          "Letar underlag och ser hur du bokfört liknande förut",
+          "Föreslår konto och moms, och förklarar varför",
+          "Frågar när något är oklart, till exempel privat eller representation",
+          "Bokför först när du har godkänt"
+        ],
+        "say": "Bokför mina obokade transaktioner."
+      },
+      "kvittojakten": {
+        "name": "Kvittojakten",
+        "short": "Hittar kvitton som saknas.",
+        "desc": "Letar upp kvitton och fakturor som saknas i din mejl och kopplar dem till rätt verifikat.",
+        "steps": [
+          "Listar poster som saknar underlag",
+          "Söker i din egen mejl efter kvittot",
+          "Lägger in underlaget i Accounted",
+          "Föreslår kopplingen, du godkänner",
+          "Visar vad som fortfarande saknas"
+        ],
+        "say": "Hitta kvittona som saknas.",
+        "note": "Har du Claude i Chrome? Då hämtar Kvittojakten även fakturor från portaler som AWS, Google Ads och OpenAI, och kan ställa in att de skickas till Accounted automatiskt."
+      },
+      "reconcile-month": {
+        "name": "Stäm av månaden",
+        "short": "Jämför bank och bokföring.",
+        "desc": "Jämför bank och bokföring konto för konto och visar vad som skiljer.",
+        "steps": [
+          "Jämför bank och bokföring, konto för konto",
+          "Pekar ut poster som bara finns på ena sidan",
+          "Föreslår hur skillnaden rättas",
+          "Markerar kontot som avstämt när du godkänt"
+        ],
+        "say": "Stäm av förra månaden åt mig."
+      },
+      "month-end-close": {
+        "name": "Månadsavslut",
+        "short": "Bokför klart och låser månaden.",
+        "desc": "Bokför klart, stämmer av, kontrollerar verifikatserien och låser perioden.",
+        "steps": [
+          "Kontrollerar att allt är bokfört och avstämt",
+          "Säger till om förra månaden fortfarande är öppen",
+          "Går igenom verifikatserien efter luckor",
+          "Låser perioden när du säger till"
+        ],
+        "say": "Gör månadsavslutet för förra månaden."
+      },
+      "quarterly-vat-review": {
+        "name": "Momsdeklaration",
+        "short": "Går igenom momsen ruta för ruta.",
+        "desc": "Går igenom momsen ruta för ruta och förbereder deklarationen.",
+        "steps": [
+          "Tar reda på om du redovisar per månad, kvartal eller år",
+          "Kontrollerar att perioden är bokförd och avstämd",
+          "Räknar fram momsen ruta för ruta och flaggar omvänd moms",
+          "Förbereder deklarationen för din granskning"
+        ],
+        "say": "Förbered momsdeklarationen."
+      },
+      "payroll-monthly": {
+        "name": "Lön och AGI",
+        "short": "Lön, avgifter och AGI.",
+        "desc": "Beräknar lön, arbetsgivaravgifter och semesterskuld och tar fram AGI.",
+        "steps": [
+          "Kontrollerar att de anställdas uppgifter är kompletta",
+          "Beräknar lön, skatt och arbetsgivaravgifter",
+          "Bokför lönekörningen när du godkänt",
+          "Tar fram underlaget till AGI"
+        ],
+        "say": "Kör månadens lön."
+      },
+      "invoicing-rules": {
+        "name": "Fakturera rätt",
+        "short": "Kontrollerar fakturan innan den skickas.",
+        "desc": "Kontrollerar obligatoriska uppgifter, moms och ROT/RUT innan fakturan skickas.",
+        "steps": [
+          "Frågar vad som levererats, till vem och när",
+          "Kontrollerar obligatoriska uppgifter",
+          "Väljer rätt moms och ROT/RUT",
+          "Säger till innan något skickas"
+        ],
+        "say": "Hjälp mig skapa en faktura."
+      },
+      "kreditfaktura-process": {
+        "name": "Kreditfaktura",
+        "short": "Rättar en skickad faktura rätt väg.",
+        "desc": "Väljer rätt väg när en skickad faktura ska rättas eller krediteras.",
+        "steps": [
+          "Frågar vad som är fel och om kunden har betalat",
+          "Avgör om fakturan ska krediteras eller rättas",
+          "Skapar kreditfakturan med rätt hänvisning",
+          "Följer upp återbetalningen"
+        ],
+        "say": "En faktura blev fel. Hjälp mig kreditera den."
+      },
+      "year-end-close": {
+        "name": "Årsbokslut",
+        "short": "Stänger året när allt är klart.",
+        "desc": "Bokslutstransaktioner, kontroll av att allt är klart och stängning av året.",
+        "steps": [
+          "Kontrollerar att året är redo att stängas",
+          "Föreslår periodiseringar och avskrivningar",
+          "Frågar om besluten som bara du kan ta",
+          "Stänger året när du har godkänt"
+        ],
+        "say": "Gör årsbokslutet."
+      },
+      "tax-planning": {
+        "name": "Skatteplanering",
+        "short": "Räknar på alternativen inför årsskiftet.",
+        "desc": "Periodiseringsfond, lön eller utdelning: räknar på alternativen inför årsskiftet.",
+        "steps": [
+          "Frågar om årets väntade resultat och dina planer",
+          "Räknar på periodiseringsfond",
+          "Jämför lön och utdelning",
+          "Visar effekten på skatten före årsskiftet"
+        ],
+        "say": "Räkna på min skatt inför årsskiftet."
+      }
+    },
+    "creator": {
+      "gate_kick": "Innan du skapar en skill",
+      "gate_title": "Koppla din AI först.",
+      "gate_body": "En skill är en instruktion din AI följer. Utan en kopplad AI finns det ingen som kan följa den.",
+      "back": "Tillbaka",
+      "body_intro": "Företagets egna instruktioner, skrivna i Accounted. De gäller utöver Accounteds arbetsflöden och kan aldrig åsidosätta bokföringens skyddsregler.",
+      "body_locked": "Rör aldrig låsta eller stängda perioder.",
+      "body_rules_heading": "Regler",
+      "title": "Skapa skill",
+      "close": "Stäng",
+      "stations": "Stationer",
+      "station_describe": "Beskriv",
+      "station_question": "Fråga {n}",
+      "station_end": "Framme",
+      "station_label": "Station {n}",
+      "end_label": "Slutstation",
+      "end_title": "Så här blir din skill",
+      "describe_q": "Vad ska {client} göra åt dig?",
+      "describe_ph": "Beskriv det som för en ny kollega, med dina egna ord",
+      "answer_ph": "Skriv ditt svar",
+      "add_q": "Vad ska den mer veta?",
+      "add_ph": "Lägg till något den ska veta",
+      "send": "Skicka",
+      "thinking": "Tänker",
+      "draft_failed": "Assistenten svarade inte. Försök igen.",
+      "build": "Bygg skillen",
+      "add": "Lägg till mer",
+      "added": "Du lade till:",
+      "layer_base": "Grund",
+      "layer_rules": "Regler",
+      "layer_steps": "Steg",
+      "rule_default": "Du godkänner först",
+      "body_task_heading": "Uppgift",
+      "body_steps_heading": "Steg",
+      "body_approval": "Inget bokförs, skickas eller lämnas in utan att användaren godkänt det i Accounted.",
+      "body_told_heading": "Så beskrev användaren det",
+      "body_added": "Tillagt i efterhand:"
+    }
   }
 ,
   "arkiv": {

@@ -1,4 +1,42 @@
 {
+  "ai_handoff": {
+    "do_with": "Do with {client}",
+    "do_with_ai": "Do it with your AI",
+    "title": "Continue with your AI",
+    "description": "Review the task, copy the prompt, then paste it into your connected AI. Opening a chat does not book anything.",
+    "choose_ai": "Choose AI",
+    "connect_help": "Connect {client} to Accounted before using the prompt. Availability depends on your AI plan; this is a copy-and-paste handoff.",
+    "connect": "Connect {client}",
+    "skills_preview": "Skills for this task",
+    "cli_help": "Using Claude Code or Codex? Paste the same prompt into a session connected to Accounted MCP.",
+    "skills": "{skills}. Your company's current instructions are fetched through MCP when the task starts.",
+    "discovered_skills": "Chosen from your accounting tasks",
+    "instructions": "Additional instructions (optional)",
+    "instructions_placeholder": "For example: review the proposed bookings first and explain uncertain matches.",
+    "too_many": "Select at most {max} records before continuing. No records have been omitted.",
+    "exact_prompt": "View and edit the exact prompt",
+    "copy_failed": "Clipboard access failed. Select the prompt above and copy it manually.",
+    "copied": "Copied",
+    "copy": "Copy prompt",
+    "open": "Open {client}",
+    "prompt_company": "Help me with the accounting for {name}, company_id {companyId}. Verify this company before reading or changing anything.",
+    "prompt_bootstrap": "Start with accounted_get_task using these exact arguments: {args}. Then call accounted_get_agent_briefing for this company.",
+    "prompt_skills": "Load the workflow skills {skills} and the additional active company/team skills returned by get_task. If a tool is unavailable, use accounted_search_tools to discover it.",
+    "prompt_discover": "Use the briefing and current records to suggest the most useful accounting task, and ask me to choose before making changes.",
+    "prompt_scope": "Respect the supplied scope and explicit record selections. Bank and tax-account IDs are different record types. Do not broaden the selection. Re-read live records; counts and selections may have changed.",
+    "prompt_evidence": "Inspect existing supporting documents, invoices, accounting mappings and pending proposals. Explain your suggested bookings and uncertain matches. Ask for missing information; do not invent evidence or hunt for receipts in email. Use the current skills and Accounted's calculators, not tax rules from memory.",
+    "prompt_approval": "Stage proposals using Accounted tools. Show what will change and wait for my explicit approval before committing. Respect period locks; do not reopen periods.",
+    "prompt_finish": "After approved actions, re-read the affected records. Summarize completed work, proposals awaiting approval, blocked items and the next useful step. Never report a staged proposal as completed.",
+    "prompt_extra": "My additional instructions: {instructions}",
+    "task_bookkeep": "Help me book the transactions in this scope.",
+    "task_check": "Review this accounting and explain any issues and useful next steps.",
+    "task_month-close": "Help me review and close this month.",
+    "task_payroll": "Help me prepare this payroll.",
+    "task_vat": "Help me review VAT for this period.",
+    "task_year-end": "Help me review and prepare this financial year-end.",
+    "task_start": "Suggest useful accounting work based on the current state of my company.",
+    "task_skill": "Help me complete a task using the skill {skill}."
+  },
   "common": {
     "undo": "Undo",
     "active_company": "Active company",
@@ -101,6 +139,8 @@
     "close_menu": "Close menu",
     "navigation_menu": "Navigation menu",
     "badge_coming_soon": "Coming soon",
+    "skills": "Skills",
+    "badge_new": "New",
     "badge_dev": "Dev",
     "badge_beta": "Beta",
     "needs_company_tooltip": "Add a company to enable",
@@ -788,6 +828,7 @@
     "type_book_skattekonto_rows": "Book tax account rows",
     "origin_agent_chat": "Suggested by the AI assistant via chat",
     "origin_mcp": "Suggested by an AI assistant via {label}",
+    "skills_retrieved": "Skills retrieved: {skills}",
     "origin_api": "Suggested via API integration",
     "origin_cron": "Created by a scheduled job",
     "badge_auto_expired": "Expired automatically",
@@ -10208,6 +10249,237 @@
     "error_title": "Could not reach VIES",
     "error_description": "Try again in a moment, or validate from the customer card.",
     "acknowledge_swedish_vat": "Invoice with Swedish VAT even though the customer is an EU business without a validated VAT number."
+  },
+  "skills_registry": {
+    "title": "Skills",
+    "help": "Connect your agent to get full access.",
+    "create": "Create skill",
+    "create_prompt": "Load the skill \"create-skill\" from Accounted (load_skill) and follow it. I want to create my own skill.",
+    "now_count": "{count} to do",
+    "all_done": "All done",
+    "uses": "{count, plural, one {Run once} other {Run # times}}",
+    "uses_line": "{count, plural, one {Run once} other {Run # times}} in the last six months, most recently {date}.",
+    "suggest": {
+      "bookkeep": {
+        "line": "{count, plural, one {One transaction is} other {# transactions are}} waiting to be booked.",
+        "cta": "Let {client} book {count, plural, one {it} other {them}}"
+      },
+      "kvittojakten": {
+        "line": "{count, plural, one {One document is} other {# documents are}} missing or waiting in the inbox.",
+        "cta": "Let {client} find {count, plural, one {it} other {them}}"
+      },
+      "reconcile-month": {
+        "line": "It is time to reconcile the bank account.",
+        "cta": "Let {client} reconcile"
+      }
+    },
+    "sheet_todo": "{count, plural, one { item on your to-do list is} other { items on your to-do list are}} waiting for this skill.",
+    "run_hint": "Copies the prompt and opens {client} in a new tab.",
+    "create_card_title": "Create your own skill",
+    "create_card_body": "Something you do every month? Tell {client} and it becomes a skill.",
+    "create_card_cta": "Create with {client}",
+    "hero_title": "Agent Skills",
+    "sign_title": "Connect your agent to unlock all skills",
+    "connect_client": "Connect {client}",
+    "wait_claude_title": "Continue in the Claude tab.",
+    "wait_claude_body": "Approve the connection there. When you come back here, your skills light up.",
+    "wait_title": "Continue in {client}.",
+    "open_client": "Open {client}",
+    "check_again": "I have connected",
+    "still_waiting": "No connection found yet. Approve it in {client} and try again.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copy_failed": "Could not copy. Select the text and copy it yourself.",
+    "server_address": "Server address",
+    "step_1": "Copy the address above.",
+    "step_2": "Open {client}, go to apps or connectors and paste it as a new MCP server.",
+    "step_3": "Approve it there. Then come back here and your skills light up.",
+    "cancel": "Cancel",
+    "close": "Close",
+    "say_label": "Tell your AI",
+    "prompt": "{say} Load the skill \"{skill}\" from Accounted (load_skill) and follow it.",
+    "own_say": "Run my skill {name} in Accounted.",
+    "open_hint": "Open",
+    "run_client": "Do it with {client}",
+    "copied_open": "Copied. Paste it into {client}.",
+    "copy_full": "Copy the instruction",
+    "copied_full": "Copied",
+    "body_failed": "Could not load the instruction.",
+    "locked_line": "Connect your agent to use this one.",
+    "own_desc": "Created by you. Your AI always loads the latest version.",
+    "draft_tag": "New: add it",
+    "draft_desc": "Created by your AI. Read through the steps. Once you add it, your AI can use it.",
+    "add_draft": "Add the skill",
+    "edit_answers": "Change answers",
+    "delete": "Delete",
+    "delete_confirm": "Delete the skill? Your AI can no longer load it.",
+    "load_failed": "Could not load skills.",
+    "retry": "Try again",
+    "save_failed": "Could not save the skill. Try again.",
+    "viewer_note": "You have read access in this company and cannot create or delete skills.",
+    "skills": {
+      "bookkeep": {
+        "name": "Book transactions",
+        "short": "Proposes account and VAT. You approve.",
+        "desc": "Works through unbooked bank transactions, proposes account and VAT and waits for your approval.",
+        "steps": [
+          "Fetches your unbooked bank transactions",
+          "Looks for documents and how you booked similar ones before",
+          "Proposes account and VAT, and explains why",
+          "Asks when something is unclear, such as private or entertainment",
+          "Books only after you approve"
+        ],
+        "say": "Book my unbooked transactions."
+      },
+      "kvittojakten": {
+        "name": "Kvittojakten",
+        "short": "Finds missing receipts.",
+        "desc": "Finds the receipts and invoices missing from your books in your mail and links them to the right voucher.",
+        "steps": [
+          "Lists entries that lack a document",
+          "Searches your own mail for the receipt",
+          "Brings the document into Accounted",
+          "Proposes the link, you approve",
+          "Shows what is still missing"
+        ],
+        "say": "Find the missing receipts.",
+        "note": "Using Claude in Chrome? Kvittojakten then also fetches invoices from portals like AWS, Google Ads and OpenAI, and can set them up to arrive in Accounted automatically."
+      },
+      "reconcile-month": {
+        "name": "Reconcile the month",
+        "short": "Compares bank and books.",
+        "desc": "Compares bank and books account by account and shows what differs.",
+        "steps": [
+          "Compares bank and books, account by account",
+          "Points out entries that exist on one side only",
+          "Proposes how to correct the difference",
+          "Signs the account off once you approve"
+        ],
+        "say": "Reconcile last month for me."
+      },
+      "month-end-close": {
+        "name": "Month-end close",
+        "short": "Finishes the books and locks the month.",
+        "desc": "Finishes booking, reconciles, checks the voucher series and locks the period.",
+        "steps": [
+          "Checks that everything is booked and reconciled",
+          "Tells you if last month is still open",
+          "Checks the voucher series for gaps",
+          "Locks the period when you say so"
+        ],
+        "say": "Close last month."
+      },
+      "quarterly-vat-review": {
+        "name": "VAT return",
+        "short": "Reviews VAT box by box.",
+        "desc": "Reviews VAT box by box and prepares the return.",
+        "steps": [
+          "Finds out whether you file monthly, quarterly or yearly",
+          "Checks that the period is booked and reconciled",
+          "Computes VAT box by box and flags reverse charge",
+          "Prepares the return for your review"
+        ],
+        "say": "Prepare the VAT return."
+      },
+      "payroll-monthly": {
+        "name": "Payroll and AGI",
+        "short": "Salary, fees and AGI.",
+        "desc": "Computes salary, employer contributions and vacation liability, and produces the AGI.",
+        "steps": [
+          "Checks that employee details are complete",
+          "Computes salary, tax and employer contributions",
+          "Books the salary run once you approve",
+          "Produces the AGI data"
+        ],
+        "say": "Run this month's payroll."
+      },
+      "invoicing-rules": {
+        "name": "Invoice correctly",
+        "short": "Checks the invoice before it is sent.",
+        "desc": "Checks mandatory details, VAT and ROT/RUT before the invoice is sent.",
+        "steps": [
+          "Asks what was delivered, to whom and when",
+          "Checks the mandatory details",
+          "Picks the right VAT and ROT/RUT",
+          "Tells you before anything is sent"
+        ],
+        "say": "Help me create an invoice."
+      },
+      "kreditfaktura-process": {
+        "name": "Credit note",
+        "short": "Corrects a sent invoice the right way.",
+        "desc": "Picks the right path when a sent invoice must be corrected or credited.",
+        "steps": [
+          "Asks what is wrong and whether the customer has paid",
+          "Decides whether to credit or correct",
+          "Creates the credit note with the right reference",
+          "Follows up the refund"
+        ],
+        "say": "An invoice was wrong. Help me credit it."
+      },
+      "year-end-close": {
+        "name": "Year-end close",
+        "short": "Closes the year when everything is ready.",
+        "desc": "Closing entries, a check that everything is ready, and closing the year.",
+        "steps": [
+          "Checks that the year is ready to close",
+          "Proposes accruals and depreciation",
+          "Asks about the decisions only you can take",
+          "Closes the year once you approve"
+        ],
+        "say": "Do the year-end close."
+      },
+      "tax-planning": {
+        "name": "Tax planning",
+        "short": "Works out the options before year end.",
+        "desc": "Tax allocation reserve, salary or dividend: works out the options before year end.",
+        "steps": [
+          "Asks about the expected result and your plans",
+          "Works out a tax allocation reserve",
+          "Compares salary and dividend",
+          "Shows the tax effect before year end"
+        ],
+        "say": "Work out my tax before year end."
+      }
+    },
+    "creator": {
+      "gate_kick": "Before you create a skill",
+      "gate_title": "Connect your AI first.",
+      "gate_body": "A skill is an instruction your AI follows. Without a connected AI there is nobody to follow it.",
+      "back": "Back",
+      "body_intro": "The company's own instructions, written in Accounted. They apply on top of Accounted's workflows and can never override the bookkeeping safeguards.",
+      "body_locked": "Never touch locked or closed periods.",
+      "body_rules_heading": "Rules",
+      "title": "Create skill",
+      "close": "Close",
+      "stations": "Stations",
+      "station_describe": "Describe",
+      "station_question": "Question {n}",
+      "station_end": "Arrived",
+      "station_label": "Station {n}",
+      "end_label": "Last station",
+      "end_title": "This is your skill",
+      "describe_q": "What should {client} do for you?",
+      "describe_ph": "Describe it as you would to a new colleague, in your own words",
+      "answer_ph": "Write your answer",
+      "add_q": "What else should it know?",
+      "add_ph": "Add something it should know",
+      "send": "Send",
+      "thinking": "Thinking",
+      "draft_failed": "The assistant did not answer. Try again.",
+      "build": "Build the skill",
+      "add": "Add more",
+      "added": "You added:",
+      "layer_base": "Base",
+      "layer_rules": "Rules",
+      "layer_steps": "Steps",
+      "rule_default": "You approve first",
+      "body_task_heading": "Task",
+      "body_steps_heading": "Steps",
+      "body_approval": "Nothing is booked, sent or filed without the user approving it in Accounted.",
+      "body_told_heading": "How the user described it",
+      "body_added": "Added afterwards:"
+    }
   }
 ,
   "arkiv": {
