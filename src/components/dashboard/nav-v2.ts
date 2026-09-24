@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { Archive, ArrowLeftRight, BarChart3, BookOpen, CheckSquare, FileCheck, HandCoins, Landmark, Percent, ReceiptText, Sparkles, Wallet } from 'lucide-react'
+import { Archive, ArrowLeftRight, BarChart3, BookOpen, CheckSquare, FileCheck, HandCoins, Landmark, Percent, ReceiptText, Sparkles, Wallet, Workflow } from 'lucide-react'
 import { EXTENSION_REQUIRED_CAPABILITY, type CapabilityKey } from '@/lib/entitlements/keys'
 import type { EntityType } from '@/types'
 
@@ -59,7 +59,7 @@ export const NAV_V2_TOP: NavV2Item[] = [
     icon: Sparkles,
     sub: [{ href: '/agent-knowledge', labelKey: 'agent_knowledge' }],
   },
-  { href: '/skills', labelKey: 'skills', icon: BookOpen, newBadge: true, requiresAgents: true },
+  { href: '/skills', labelKey: 'skills', icon: Workflow, newBadge: true, requiresAgents: true },
 ]
 
 export const NAV_V2_COMPANY: NavV2Item[] = [
